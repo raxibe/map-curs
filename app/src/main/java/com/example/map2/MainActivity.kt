@@ -5,8 +5,10 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -18,6 +20,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.traceEventEnd
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
@@ -25,7 +28,6 @@ import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.map2.ui.theme.Map2Theme
-import ru.sulgik.mapkit.Color
 import ru.sulgik.mapkit.MapKit
 import ru.sulgik.mapkit.compose.Circle
 import ru.sulgik.mapkit.compose.Placemark
@@ -51,6 +53,8 @@ class MainActivity : ComponentActivity() {
             enableEdgeToEdge()
             initMapKit()
             MapScreen()
+
+
 
         }
     }
@@ -102,7 +106,38 @@ fun MapScreen() {
 
     }
 
+
+    var clicksCount by remember { mutableStateOf(1) }
+  //  val density = LocalDensity.current
+   // val contentSize = with(density) { DpSize(75.dp, 10.dp + 12.sp.toDp()) }
+    val clicksImageProvider = imageProvider(size = DpSize(width = 30.dp , height = 30.dp), clicksCount) {
+        Box(
+            modifier = Modifier
+                .background(Color.LightGray, MaterialTheme.shapes.medium)
+                .border(
+                    1.dp,
+                    MaterialTheme.colorScheme.outline,
+                    MaterialTheme.shapes.medium
+                )
+                .padding(vertical = 5.dp, horizontal = 10.dp)
+        ) {
+            Text("clicks: $clicksCount", fontSize = 12.sp)
+        }
+    }
+
+    Placemark(
+        icon = clicksImageProvider,
+        state = rememberPlacemarkState(placemarkGeometry),
+        onTap = {
+            clicksCount++
+            true
+        }
+    )
+
+
 }
+
+
 
 
 
