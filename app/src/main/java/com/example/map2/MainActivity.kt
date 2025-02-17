@@ -81,29 +81,24 @@ fun MapScreen() {
     ) {
 
 
-//        Placemark(
-//
-//            contentSize = DpSize(75.dp, 10.dp ),state = rememberPlacemarkState(placemarkGeometry), iconStyle = IconStyle()
-//
-//
-//        )
-
-        Placemark(contentSize =DpSize(75.dp, 10.dp ) , state =rememberPlacemarkState(placemarkGeometry) , iconStyle = IconStyle())
-//
-//        Placemark(
-//
-//            contentSize = 10.dp,
-//            state = rememberPlacemarkState(placemarkGeometry),
-//            icon = ImageProvider.fromResource(
-//                context = context,
-//                R.drawable.mappp,
-//                isCacheable = true
-//            ),
-//
-//            )
 
 
-        //Circle(state = rememberCircleState(geometry = Circle(placemarkGeometry, 10.0f)))//, icon = ImageProvider.fromResource(context = context, R.drawable.mappp),)
+
+
+        Placemark(
+
+
+            state = rememberPlacemarkState(placemarkGeometry),
+            icon = ImageProvider.fromResource(
+                context = context,
+                R.drawable.mappp,
+                isCacheable = true
+            ),
+            iconStyle = IconStyle(scale = 0.05f)
+
+            )
+
+
 
     }
 
