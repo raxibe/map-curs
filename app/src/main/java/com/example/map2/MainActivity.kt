@@ -150,3 +150,64 @@ fun MapScreen() {
 fun initMapKit() {
     MapKit.setApiKey("299e664a-6317-4736-9d0b-941426428ecd")
 }
+
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.launch
+
+//@Composable
+//fun BottomSheetExample() {
+//    val sheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
+//    val scope = rememberCoroutineScope()
+//    var showBottomSheet by remember { mutableStateOf(false) }
+//
+//    Scaffold(
+//        floatingActionButton = {
+//            ExtendedFloatingActionButton(
+//                text = { Text("Показать нижнюю панель") },
+//                icon = { Icon(Icons.Filled.Add, contentDescription = "") },
+//                onClick = {
+//                    scope.launch {
+//                        sheetState.show() // Сначала показываем bottom sheet
+//                        showBottomSheet = true // Затем обновляем состояние
+//                    }
+//                }
+//            )
+//        }
+//    ) { contentPadding ->
+//        ModalBottomSheet(
+//            sheetState = sheetState,
+//            onDismissRequest = {
+//                scope.launch {
+//                    sheetState.hide() // Скрываем bottom sheet
+//                    showBottomSheet = false // Обновляем состояние
+//                }
+//            },
+//            content = {
+//                Column(
+//                    modifier = Modifier
+//                        .fillMaxWidth()
+//                        .padding(16.dp),
+//                    horizontalAlignment = Alignment.CenterHorizontally
+//                ) {
+//                    Text("Это классная нижняя панель!")
+//                    Spacer(modifier = Modifier.height(20.dp))
+//                    Button(onClick = {
+//                        scope.launch {
+//                            sheetState.hide() // Скрываем bottom sheet
+//                            showBottomSheet = false // Обновляем состояние
+//                        }
+//                    }) {
+//                        Text("Скрыть нижнюю панель")
+//                    }
+//                }
+//            }
+//        )
+//    }
+//}
