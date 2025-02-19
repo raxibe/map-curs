@@ -1,6 +1,7 @@
 package com.example.map2
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -68,7 +69,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
     )
 }
 
-val startPosition = CameraPosition(Point(63.723768, 75.961573), 11.0f, 10.0F, 0.0f)
+val startPosition = CameraPosition(Point(63.201795, 75.450244), 11.0f, 10.0F, 0.0f)
 
 val placemarkGeometry = Point(63.201436, 75.451114)
 
@@ -98,7 +99,11 @@ fun MapScreen() {
                 R.drawable.mappp,
                 isCacheable = true
             ),
-            iconStyle = IconStyle(scale = 0.05f)
+            iconStyle = IconStyle(scale = 0.05f),
+            onTap = {
+                Log.d("CheckViewModel","HourFragment it: $it")
+                true
+            }
 
             )
 
@@ -107,32 +112,32 @@ fun MapScreen() {
     }
 
 
-    var clicksCount by remember { mutableStateOf(1) }
-  //  val density = LocalDensity.current
-   // val contentSize = with(density) { DpSize(75.dp, 10.dp + 12.sp.toDp()) }
-    val clicksImageProvider = imageProvider(size = DpSize(width = 30.dp , height = 30.dp), clicksCount) {
-        Box(
-            modifier = Modifier
-                .background(Color.LightGray, MaterialTheme.shapes.medium)
-                .border(
-                    1.dp,
-                    MaterialTheme.colorScheme.outline,
-                    MaterialTheme.shapes.medium
-                )
-                .padding(vertical = 5.dp, horizontal = 10.dp)
-        ) {
-            Text("clicks: $clicksCount", fontSize = 12.sp)
-        }
-    }
+//    var clicksCount by remember { mutableStateOf(1) }
+//  //  val density = LocalDensity.current
+//   // val contentSize = with(density) { DpSize(75.dp, 10.dp + 12.sp.toDp()) }
+//    val clicksImageProvider = imageProvider(size = DpSize(width = 30.dp , height = 30.dp), clicksCount) {
+//        Box(
+//            modifier = Modifier
+//                .background(Color.LightGray, MaterialTheme.shapes.medium)
+//                .border(
+//                    1.dp,
+//                    MaterialTheme.colorScheme.outline,
+//                    MaterialTheme.shapes.medium
+//                )
+//                .padding(vertical = 5.dp, horizontal = 10.dp)
+//        ) {
+//            Text("clicks: $clicksCount", fontSize = 12.sp)
+//        }
+//    }
 
-    Placemark(
-        icon = clicksImageProvider,
-        state = rememberPlacemarkState(placemarkGeometry),
-        onTap = {
-            clicksCount++
-            true
-        }
-    )
+//    Placemark(
+//        icon = clicksImageProvider,
+//        state = rememberPlacemarkState(placemarkGeometry),
+//        onTap = {
+//            clicksCount++
+//            true
+//        }
+//    )
 
 
 }
