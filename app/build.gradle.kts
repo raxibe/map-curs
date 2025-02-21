@@ -53,6 +53,11 @@ dependencies {
 
     implementation("ru.sulgik.mapkit:yandex-mapkit-kmp-compose:0.1.0")
 
+    implementation ("androidx.compose.material:material:1.3.1")
+    implementation ("com.google.accompanist:accompanist-insets:0.23.1")
+
+
+
     implementation("androidx.core:core-ktx:1.15.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.7")
     implementation("androidx.activity:activity-compose:1.10.0")
