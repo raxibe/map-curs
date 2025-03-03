@@ -73,126 +73,24 @@ import ru.sulgik.mapkit.map.IconStyle
 import ru.sulgik.mapkit.map.ImageProvider
 import ru.sulgik.mapkit.map.fromResource
 
-//data class GeometryIcons(
-//    val geometryIcon: Point
-//)
-//
-//
-//data class Iconss(
-//    val image: Int,
-//    val name: String,
-//    val geometry: GeometryIcons,
-//)
-//
-//class MainActivity : ComponentActivity() {
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        setContent {
-//            enableEdgeToEdge()
-//            initMapKit()
-//            MapScreen()
-//
-//
-//        }
-//    }
-//}
-//
-//
-//val startPosition = CameraPosition(Point(63.201795, 75.450244), 11.0f, 10.0F, 0.0f)
-//
-//val placemarkGeometry1 = GeometryIcons(Point(63.201436, 75.451114))
-//val placemarkGeometry2 = GeometryIcons(Point(63.201810, 75.451144))
-//
-//
-//val dodo1 = Iconss(R.drawable.mappp, "ну допустим тут живет нуф нуф", placemarkGeometry1)
-//val nedodo = Iconss(R.drawable.mappp, "ну допустим тут живет ниф ниф", placemarkGeometry2)
-//
-//
-//@OptIn(ExperimentalMaterialApi::class)
-//@Composable
-//fun MapScreen() {
-//    val context = LocalContext.current
-//
-//    val bottomSheetScaffoldState = rememberBottomSheetScaffoldState(
-//        bottomSheetState = rememberBottomSheetState(BottomSheetValue.Collapsed)
-//    )
-//
-//
-//    var value by remember { mutableStateOf(dodo1) }
-//
-//    val coroutineScope = rememberCoroutineScope()
-//
-//    rememberAndInitializeMapKit().bindToLifecycleOwner() // if is not called earlier
-//    val cameraPositionState = rememberCameraPositionState { position = startPosition }
-//
-//    BottomSheetScaffold(
-//        scaffoldState = bottomSheetScaffoldState, sheetContent = {
-//            Box(
-//                Modifier
-//                    .fillMaxWidth()
-//                    .height(300.dp)
-//                    .padding(16.dp),
-//                contentAlignment = Alignment.Center
-//            ) {
-//                MapCard(value)
-//            }
-//        }, sheetPeekHeight = 0.dp
-//    ) {
-//
-//        YandexMap(
-//            cameraPositionState = cameraPositionState,
-//            modifier = Modifier.fillMaxSize(),
-//        ) {
-//            Placemark(state = rememberPlacemarkState(placemarkGeometry1.geometryIcon),
-//                icon = ImageProvider.fromResource(
-//                    context = context, R.drawable.mappp, isCacheable = true
-//                ),
-//                iconStyle = IconStyle(scale = 0.05f),
-//                onTap = {
-//                    Log.d("CheckViewModel", "HourFragment it: $it")
-//                    coroutineScope.launch {
-//                        bottomSheetScaffoldState.bottomSheetState.expand()
-//                    }
-//                    true
-//                })
-//
-//        }
-//    }
-//}
-//
-//
-//
-//
-//@Composable
-//fun MapCard(icons: Iconss) {
-//    Box(
-//        modifier = Modifier.fillMaxSize()
-//    ) {
-//        Text(text = icons.name)
-//    }
-//}
-//
-//
-//@Composable
-//fun initMapKit() {
-//    MapKit.setApiKey("299e664a-6317-4736-9d0b-941426428ecd")
-//}
-
-
-
-
-
-
-
-
 data class GeometryIcons(
     val geometryIcon: Point
 )
 
 data class Iconss(
     val image: Int,
-    val name: String,
     val geometry: GeometryIcons,
+    val city: String,
+    val adres: String,
+    val state: Boolean,
+    val timeToState: String,
+    val imageRange: Int,
+    val range: String,
+    val delivery: String,
+    val scheduleDilivery: String,
+    val pizzeria: String,
+    val schedulePizzeria: String,
+    val phoneNumber: String
 )
 
 class MainActivity : ComponentActivity() {
@@ -210,9 +108,11 @@ val startPosition = CameraPosition(Point(63.201795, 75.450244), 11.0f, 10.0F, 0.
 
 val placemarkGeometry1 = GeometryIcons(Point(63.201436, 75.451114))
 val placemarkGeometry2 = GeometryIcons(Point(63.201810, 75.451144))
+val placemarkGeometry3 = GeometryIcons(Point(63.201810, 75.551144))
 
-val dodo1 = Iconss(R.drawable.mappp, "ну допустим тут живет нуф нуф", placemarkGeometry1)
-val nedodo = Iconss(R.drawable.map_1, "ну допустим тут живет ниф ниф", placemarkGeometry2)
+//val dodo1 = Iconss(R.drawable.mappp, "ну допустим тут живет нуф нуф", placemarkGeometry1)
+//val nedodo = Iconss(R.drawable.map_1, "ну допустим тут живет ниф ниф", placemarkGeometry2)
+//val nedodo2 = Iconss(R.drawable.map_1, "ну допустим тут живет чиф киф", placemarkGeometry3)
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -231,7 +131,7 @@ fun MapScreen() {
     val cameraPositionState = rememberCameraPositionState { position = startPosition }
 
     val icons = remember {
-        mutableListOf(dodo1, nedodo)
+        mutableListOf(dodo1, nedodo,nedodo2)
     }
 
     BottomSheetScaffold(
@@ -272,17 +172,17 @@ fun MapScreen() {
         }
     }
 
-    // Кнопка для добавления новых иконок
-    ExtendedFloatingActionButton(
-        text = { Text("Добавить иконку") },
-        icon = { Icon(Icons.Filled.Add, contentDescription = "Добавить") },
-        onClick = {
-            // Здесь можно добавить логику для добавления новых иконок
-            val newIcon = Iconss(R.drawable.mappp, "Новая иконка", GeometryIcons(Point(63.202436, 75.451114)))
-            icons.add(newIcon)
-        },
-        modifier = Modifier.padding(16.dp)
-    )
+//    // Кнопка для добавления новых иконок
+//    ExtendedFloatingActionButton(
+//        text = { Text("Добавить иконку") },
+//        icon = { Icon(Icons.Filled.Add, contentDescription = "Добавить") },
+//        onClick = {
+//            // Здесь можно добавить логику для добавления новых иконок
+//            val newIcon = Iconss(R.drawable.mappp, "Новая иконка", GeometryIcons(Point(63.202436, 75.451114)))
+//            icons.add(newIcon)
+//        },
+//        modifier = Modifier.padding(16.dp)
+//    )
 }
 
 @Composable
