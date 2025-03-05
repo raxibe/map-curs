@@ -84,11 +84,6 @@ data class Iconss(
     val adres: String,
     val state: Boolean,
     val timeToState: String,
-    val imageRange: Int,
-    val range: String,
-    val delivery: String,
-    val scheduleDilivery: String,
-    val pizzeria: String,
     val schedulePizzeria: String,
     val phoneNumber: String
 )
@@ -110,8 +105,8 @@ val placemarkGeometry1 = GeometryIcons(Point(63.201436, 75.451114))
 val placemarkGeometry2 = GeometryIcons(Point(63.201810, 75.451144))
 val placemarkGeometry3 = GeometryIcons(Point(63.201810, 75.551144))
 
-//val dodo1 = Iconss(R.drawable.mappp, "ну допустим тут живет нуф нуф", placemarkGeometry1)
-//val nedodo = Iconss(R.drawable.map_1, "ну допустим тут живет ниф ниф", placemarkGeometry2)
+val dodo1 = Iconss(R.drawable.mappp, placemarkGeometry1, "Ноябрьск", "Улица Новоселов, 6а", true, "до 23:00", "Ежедневно с 9:00 до 23:00", "+79208244575")
+val dodo2 = Iconss(R.drawable.map_1, placemarkGeometry2, "Ноябрьск", "На кольце", false, "до 20:00", "Никогда", "8 800 555 35 35")
 //val nedodo2 = Iconss(R.drawable.map_1, "ну допустим тут живет чиф киф", placemarkGeometry3)
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -131,7 +126,7 @@ fun MapScreen() {
     val cameraPositionState = rememberCameraPositionState { position = startPosition }
 
     val icons = remember {
-        mutableListOf(dodo1, nedodo,nedodo2)
+        mutableListOf(dodo1, dodo2)
     }
 
     BottomSheetScaffold(
@@ -190,13 +185,57 @@ fun MapCard(icons: Iconss) {
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
-        Text(text = icons.name)
+        Column(
+            modifier = Modifier
+                .padding(top = 10.dp)
+                .fillMaxSize()
+        ) {
+            Text(text = icons.city)
+            Spacer(modifier = Modifier.padding(top = 10.dp))
+            Text(text = icons.adres)
+            Spacer(modifier = Modifier.padding(top = 10.dp))
+            Row(
+                modifier = Modifier
+                .fillMaxWidth()
+            ){
+                initState(icons)
+                Spacer(modifier = Modifier.padding(start = 10.dp))
+                Text(text = icons.timeToState)
+            }
+            Spacer(modifier = Modifier.padding(top = 10.dp))
+            Row (modifier = Modifier
+                .fillMaxWidth()){
+                Column(modifier = Modifier
+                    .fillMaxWidth(0.3f)) {
+                    Text(text = "Время работы")
+                    Spacer(modifier = Modifier.padding(top = 5.dp))
+                    Text(text = "Телефон")
+                }
+                Column(modifier = Modifier
+                    .fillMaxWidth()) {
+                    Text(text = icons.schedulePizzeria)
+                    Spacer(modifier = Modifier.padding(top = 5.dp))
+                    Text(text = icons.phoneNumber)
+                }
+            }
+
+
+        }
     }
 }
 
 @Composable
 fun initMapKit() {
     MapKit.setApiKey("299e664a-6317-4736-9d0b-941426428ecd")
+}
+@Composable
+fun initState(icons: Iconss){
+    if (icons.state == true){
+        Text(text = "открыто")
+    }
+    else{
+        Text(text = "закрыто")
+    }
 }
 
 
